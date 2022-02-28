@@ -36,7 +36,11 @@ public class JointCopyMotion : MonoBehaviour
         Vector3 targetPos = targetAnchorStartPos - toCopy.position; //current offset in position from where it started at the v beginning
         Quaternion targetRot = Quaternion.Inverse( toCopy.rotation) * targetAnchorStartRot; //same,but with rotation
 
-        myJoint.targetRotation = targetRot;
+        myJoint.targetRotation = targetRot.normalized;
         myJoint.targetPosition = targetPos;
+    }
+
+    void CalculateOffsetAndStuffv2() {
+        
     }
 }
