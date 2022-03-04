@@ -51,4 +51,11 @@ public static class ConfigurableJointExtensions
 		// Set target rotation to our newly calculated rotation
 		joint.targetRotation = resultRotation;
 	}
+
+
+	static void SetTargetRotationABody(ArticulationBody body, Quaternion targetRot)
+    {
+
+		//body.SetDriveTargets();
+    }
 }
