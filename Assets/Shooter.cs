@@ -12,6 +12,7 @@ public class Shooter : MonoBehaviour
     public float timebetweenShots = 2;
     public float scatter = 5;
     private Coroutine shooterEnum;
+    public bool randomRotation = false;
     // Start is called before the first frame update
     void Start() {
         if (localDirection != Vector3.zero) localDirection.Normalize();
@@ -53,6 +54,9 @@ public class Shooter : MonoBehaviour
             Quaternion scatt = Scatter(this.transform.rotation, scatter);
             obj.transform.rotation = scatt;
             bod.AddForce(obj.transform.TransformDirection(localDirection) * force, ForceMode.Impulse);
+            if (randomRotation) {
+                obj.transform.rotation =  (Random.rotation);
+            }
         } else Debug.Log("oh no");
 
     }
