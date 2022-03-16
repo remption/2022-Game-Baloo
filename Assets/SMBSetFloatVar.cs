@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerSpeed : StateMachineBehaviour
+public class SMBSetFloatVar : StateMachineBehaviour
 {
     public float fwdSpeed = 1;
     public ScriptableFloat fwdSpeedToSet;

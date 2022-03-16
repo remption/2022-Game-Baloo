@@ -1,0 +1,157 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/RagdollExperimetns/ConfigurableJointWork/Editor/MyUSSStuff.uss?fileID=7433441132597879392&amp;guid=726ae50cc46e2c548a6d44b2cf3a0400&amp;type=3#MyUSSStuff" />
+    <ui:Foldout text="Default Inspector" name="Default_Inspector" value="false" focusable="false" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-top-left-radius: 1px; border-bottom-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px; transition-property: bottom;">
+        <ui:IMGUIContainer name="DefaultContainer" />
+    </ui:Foldout>
+    <uie:ObjectField label="Connected Body" name="Connectedbody" binding-path="m_ConnectedBody" type="UnityEngine.Rigidbody, UnityEngine.PhysicsModule" allow-scene-objects="true" style="height: auto;" />
+    <uie:ObjectField label="Connected Articulation Body" name="ConnectedArticulationbody" binding-path="connectedArticulationBody" type="UnityEngine.ArticulationBody, UnityEngine.PhysicsModule" allow-scene-objects="true" />
+    <ui:Foldout text="Anchors and Axes" name="AnchorsAndAxes" value="false" class="MySimpleFoldout">
+        <uie:Vector3Field label="Anchor" binding-path="m_Anchor" name="Anchor" style="flex-wrap: nowrap; flex-shrink: 0; flex-basis: auto;" />
+        <uie:Vector3Field label="Axis" binding-path="m_Axis" name="Axis" />
+        <ui:Toggle label="AutoConfig Connected Anchor" binding-path="m_AutoConfigureConnectedAnchor" value="false" name="AutoConfigAnchor" style="align-items: auto; -unity-text-outline-width: 0;" />
+        <uie:Vector3Field label="Connected Anchor" binding-path="m_ConnectedAnchor" name="ConnectedAnchor" />
+        <uie:Vector3Field label="Secondary Axis" binding-path="m_SecondaryAxis" name="SecondaryAxis" />
+    </ui:Foldout>
+    <ui:Foldout text="Motion Settings" name="MotionSettingsFoldout" value="false" class="MySimpleFoldout">
+        <ui:GroupBox name="MotionXYZ" text="Motion(XYZ)" style="flex-direction: row; margin-left: 0;">
+            <ui:DropdownField index="0" choices="Free,Limited,Locked" binding-path="m_XMotion" name="XMotion" style="width: 30%; justify-content: flex-end; overflow: hidden; position: relative; flex-shrink: 4; flex-direction: row;" />
+            <ui:DropdownField index="0" choices="Free,Limited,Locked" binding-path="m_YMotion" name="YMotion" style="width: 30%; justify-content: flex-end; overflow: hidden; position: relative; flex-shrink: 4; flex-direction: row;" />
+            <ui:DropdownField index="0" choices="Free,Limited,Locked" binding-path="m_ZMotion" name="ZMotion" style="width: 30%; justify-content: flex-end; overflow: hidden; position: relative; flex-shrink: 4; flex-direction: row;" />
+        </ui:GroupBox>
+        <ui:GroupBox name="RotationXYZ" text="Rotation(XYZ)" style="flex-direction: row; margin-left: 0; padding-left: 2px;">
+            <ui:DropdownField index="0" choices="Free,Limited,Locked" binding-path="m_AngularXMotion" name="XRotation" style="width: 30%; justify-content: flex-end; overflow: hidden; position: relative; flex-shrink: 4; flex-direction: row; -unity-text-align: upper-center;" />
+            <ui:DropdownField index="0" choices="Free,Limited,Locked" binding-path="m_AngularYMotion" name="YRotation" style="width: 30%; justify-content: flex-end; overflow: hidden; position: relative; flex-shrink: 4; flex-direction: row;" />
+            <ui:DropdownField index="0" choices="Free,Limited,Locked" binding-path="m_AngularZMotion" name="ZRotation" style="width: 30%; justify-content: flex-end; overflow: hidden; position: relative; flex-shrink: 4; flex-direction: row;" />
+        </ui:GroupBox>
+    </ui:Foldout>
+    <ui:Foldout text="Linear Limit Settings" name="LinearLimitSettingsFoldout" value="false">
+        <ui:GroupBox style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="Linear Limit Spring" display-tooltip-when-elided="true" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: space-around; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Spring" value="0" binding-path="m_LinearLimitSpring.spring" style="flex-direction: column; justify-content: space-around;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_LinearLimitSpring.damper" style="flex-direction: column; align-items: stretch; justify-content: space-around;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="Linear Limit" display-tooltip-when-elided="true" name="Label_LinearLimit" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Limit" value="0" binding-path="m_LinearLimit.limit" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Bounciness" value="0" binding-path="m_LinearLimit.bounciness" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Contact Distance" value="0" binding-path="m_LinearLimit.contactDistance" is-delayed="false" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:Foldout>
+    <ui:Foldout text="Angular X Limit Settings" name="AngularXLimitFoldout" value="false">
+        <ui:GroupBox name="AngularXLimitSpringGroup" style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="Angular X Limit Spring" display-tooltip-when-elided="true" name="AngularXLimitSpringLabel" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: space-around; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Spring" value="0" binding-path="m_AngularXLimitSpring.spring" name="AngularXLimitSpring" style="flex-direction: column; justify-content: space-around;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_AngularXLimitSpring.damper" name="AngularXLimitDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="High Angular X Limit" display-tooltip-when-elided="true" name="Label_HighXAngularLimit" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Limit" value="0" binding-path="m_HighAngularXLimit.limit" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Bounciness" value="0" binding-path="m_HighAngularXLimit.bounciness" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Contact Distance" value="0" binding-path="m_HighAngularXLimit.contactDistance" is-delayed="false" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="Low Angular X Limit" display-tooltip-when-elided="true" name="Label_LowXAngularLimit" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Limit" value="0" binding-path="m_LowAngularXLimit.limit" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Bounciness" value="0" binding-path="m_LowAngularXLimit.bounciness" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Contact Distance" value="0" binding-path="m_LowAngularXLimit.contactDistance" is-delayed="false" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:Foldout>
+    <ui:Foldout text="Angular YZ Limit Settings" name="AngularYZLimitFoldout" value="false">
+        <ui:GroupBox name="AngularXLimitSpringGroup" style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="Angular YZ Limit Spring" display-tooltip-when-elided="true" name="AngularYZLimitSpringLabel" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: space-around; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Spring" value="0" binding-path="m_AngularYZLimitSpring.spring" name="AngularYZLimitSpring" style="flex-direction: column; justify-content: space-around;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_AngularYZLimitSpring.damper" name="AngularYZLimitDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="Angular Y Limit" display-tooltip-when-elided="true" name="Label_AngularYLimit" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Limit" value="0" binding-path="m_AngularYLimit.limit" name="AngularYLimitLimit" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Bounciness" value="0" binding-path="m_AngularYLimit.bounciness" name="AngularYLimitBounciness" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Contact Distance" value="0" binding-path="m_AngularYLimit.contactDistance" is-delayed="false" name="AngularYLimitContactDistance" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox style="background-color: rgb(36, 36, 36);">
+            <ui:Label text="Angular Z Limit" display-tooltip-when-elided="true" name="Label_AngularZLimit" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center; background-color: rgb(34, 34, 34);">
+                <uie:FloatField label="Limit" value="0" binding-path="m_AngularZLimit.limit" name="AngularZLimitLimit" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Bounciness" value="0" binding-path="m_AngularZLimit.bounciness" name="AngularZLimitBounciness" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Contact Distance" value="0" binding-path="m_AngularZLimit.contactDistance" is-delayed="false" name="AngularZLimitContactDistance" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:Foldout>
+    <ui:Foldout text="Linear Targets And Drives" name="LinearTargetsAndDrivesFoldout" value="false" class="MySimpleFoldout">
+        <uie:Vector3Field label="Target Position" binding-path="m_TargetPosition" name="TargetPosition" style="flex-wrap: nowrap; flex-shrink: 0; flex-basis: auto; height: 18px;" />
+        <uie:Vector3Field label="Target Velocity" binding-path="m_TargetVelocity" name="TargetVelocity" />
+        <ui:GroupBox name="XDriveGroupBox" style="background-color: rgb(58, 58, 58);">
+            <ui:Label text="X Drive" display-tooltip-when-elided="true" name="Label_XDriveGroup" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center;">
+                <uie:FloatField label="Spring" value="0" binding-path="m_XDrive.positionSpring" name="XDrivePositionSpring" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_XDrive.positionDamper" name="XDrivePositionDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Max Force" value="0" binding-path="m_XDrive.maximumForce" is-delayed="false" name="XDriveMaximumForce" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="YDriveGroupBox" style="background-color: rgb(58, 58, 58);">
+            <ui:Label text="Y Drive" display-tooltip-when-elided="true" name="Label_YDriveGroup" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center;">
+                <uie:FloatField label="Spring" value="0" binding-path="m_YDrive.positionSpring" name="YDrivePositionSpring" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_YDrive.positionDamper" name="YDrivePositionDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Max Force" value="0" binding-path="m_YDrive.maximumForce" is-delayed="false" name="YDriveMaximumForce" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="ZDriveGroupBox" style="background-color: rgb(58, 58, 58); margin-bottom: 5px;">
+            <ui:Label text="Z Drive" display-tooltip-when-elided="true" name="Label_ZDriveGroup" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center;">
+                <uie:FloatField label="Spring" value="0" binding-path="m_ZDrive.positionSpring" name="ZDrivePositionSpring" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_ZDrive.positionDamper" name="ZDrivePositionDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Max Force" value="0" binding-path="m_ZDrive.maximumForce" is-delayed="false" name="ZDriveMaximumForce" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:Foldout>
+    <ui:Foldout text="Angular Targets And Drives" name="AngularTargetsAndDrivesFoldout" value="true" class="MySimpleFoldout" style="padding-bottom: 5px; padding-right: 3px;">
+        <ui:GroupBox name="TargetRotationGroupBox" style="flex-direction: row; margin-top: 1px; margin-left: 0; padding-left: 0; padding-top: 3px;">
+            <ui:Label text="Target Rotation" display-tooltip-when-elided="true" name="TargetRotationLabel" style="width: 21%; white-space: normal; -unity-text-align: middle-left;" />
+            <uie:FloatField label="X" value="0" binding-path="m_TargetRotation.x" style="flex-direction: column; width: 18%; -unity-text-align: upper-left; justify-content: space-around;" />
+            <uie:FloatField label="Y" value="0" binding-path="m_TargetRotation.y" style="flex-direction: column; width: 18%; -unity-text-align: upper-left;" />
+            <uie:FloatField label="Z" value="0" binding-path="m_TargetRotation.y" style="flex-direction: column; width: 18%; -unity-text-align: upper-left;" />
+            <uie:FloatField label="W" value="0" binding-path="m_TargetRotation.w" style="flex-direction: column; width: 18%; -unity-text-align: upper-left;" />
+        </ui:GroupBox>
+        <uie:Vector3Field label="Target Angular Velocity" binding-path="m_TargetAngularVelocity" name="TargetAngularVelocity" />
+        <ui:DropdownField label="Rotation Drive Mode" index="0" choices="X and YZ,Slerp" name="RotationDriveMode" binding-path="m_RotationDriveMode" />
+        <ui:GroupBox name="AngularXDriveGroupBox" style="background-color: rgb(58, 58, 58);">
+            <ui:Label text="Angular X Drive" display-tooltip-when-elided="true" name="Label_AngularXDriveGroup" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center;">
+                <uie:FloatField label="Spring" value="0" binding-path="m_AngularXDrive.positionSpring" name="AngularXDrivePositionSpring" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_AngularXDrive.positionDamper" name="AngularXDrivePositionDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Max Force" value="0" binding-path="m_AngularXDrive.maximumForce" is-delayed="false" name="AngularXDriveMaximumForce" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="YDriveGroupBox" style="background-color: rgb(58, 58, 58);">
+            <ui:Label text="Angular YZ Drive" display-tooltip-when-elided="true" name="Label_AngularYZDriveGroup" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center;">
+                <uie:FloatField label="Spring" value="0" binding-path="m_AngularYZDrive.positionSpring" name="AngularYZDrivePositionSpring" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_AngularYZDrive.positionDamper" name="AngularYZDrivePositionDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Max Force" value="0" binding-path="m_AngularYZDrive.maximumForce" is-delayed="false" name="AngularYZDriveMaximumForce" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="SlerpDriveGroupBox" style="background-color: rgb(58, 58, 58);">
+            <ui:Label text="Slerp Drive" display-tooltip-when-elided="true" name="Label_SlerpDriveGroup" />
+            <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: center;">
+                <uie:FloatField label="Spring" value="0" binding-path="m_SlerpDrive.positionSpring" name="SlerpDrivePositionSpring" style="flex-direction: column; justify-content: space-around; width: 30%;" />
+                <uie:FloatField label="Damper" value="0" binding-path="m_SlerpDrive.positionDamper" name="SlerpDrivePositionDamper" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 30%; -unity-text-align: upper-left;" />
+                <uie:FloatField label="Max Force" value="0" binding-path="m_SlerpDrive.maximumForce" is-delayed="false" name="SlerpDriveMaximumForce" style="flex-direction: column; align-items: stretch; justify-content: space-around; width: 33%; min-width: 30%;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:Foldout>
+</ui:UXML>

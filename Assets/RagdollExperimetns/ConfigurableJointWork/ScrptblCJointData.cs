@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class ConvertToArt : MonoBehaviour
+public class ScrptblCJointData : ScriptableObject
 {
-    public bool executePls = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,17 +13,6 @@ public class ConvertToArt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (executePls) ExecuteMe();
-    }
-
-
-    void ExecuteMe()
-    {
-
-
-
-
-
-        executePls = false;
+        
     }
 }

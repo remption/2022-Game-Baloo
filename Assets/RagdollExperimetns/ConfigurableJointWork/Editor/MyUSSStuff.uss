@@ -1,0 +1,18 @@
+.MySimpleFoldout {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    background-color: rgb(38, 38, 38);
+    border-left-color: rgb(207, 207, 207);
+    border-right-color: rgb(207, 207, 207);
+    border-top-color: rgb(207, 207, 207);
+    border-bottom-color: rgb(207, 207, 207);
+    transition-property: flex-grow;
+    transition-duration: 1s;
+    flex-shrink: 1;
+    -unity-text-outline-width: 0;
+    opacity: 1;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
