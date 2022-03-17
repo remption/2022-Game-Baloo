@@ -23,7 +23,7 @@
             <ui:DropdownField index="0" choices="Free,Limited,Locked" binding-path="m_AngularZMotion" name="ZRotation" style="width: 30%; justify-content: flex-end; overflow: hidden; position: relative; flex-shrink: 4; flex-direction: row;" />
         </ui:GroupBox>
     </ui:Foldout>
-    <ui:Foldout text="Linear Limit Settings" name="LinearLimitSettingsFoldout" value="true" class="DefaultStyles_Foldout MySimpleFoldout" style="padding-bottom: 3px;">
+    <ui:Foldout text="Linear Limit Settings" name="LinearLimitSettingsFoldout" value="false" class="DefaultStyles_Foldout MySimpleFoldout" style="padding-bottom: 3px;">
         <ui:GroupBox class="simpleGroupBox" style="margin-top: 1px; padding-top: 1px; padding-bottom: 0; margin-bottom: 0;">
             <ui:Label text="Linear Limit Spring" display-tooltip-when-elided="true" class="DefaultElement" />
             <ui:GroupBox style="flex-direction: row; margin-top: 1px; padding-top: 1px; justify-content: space-around;">
@@ -90,7 +90,7 @@
             </ui:GroupBox>
         </ui:GroupBox>
     </ui:Foldout>
-    <ui:Foldout text="Linear Targets And Drives" name="LinearTargetsAndDrivesFoldout" value="true" class="MySimpleFoldout">
+    <ui:Foldout text="Linear Targets And Drives" name="LinearTargetsAndDrivesFoldout" value="false" class="MySimpleFoldout">
         <uie:Vector3Field label="Target Position" binding-path="m_TargetPosition" name="TargetPosition" style="flex-wrap: nowrap; flex-shrink: 0; flex-basis: auto; height: 18px; font-size: 12px; -unity-font-style: normal;" />
         <uie:Vector3Field label="Target Velocity" binding-path="m_TargetVelocity" name="TargetVelocity" style="-unity-font-style: normal; font-size: 12px;" />
         <ui:GroupBox name="XDriveGroupBox" class="simpleGroupBox" style="margin-top: 1px; padding-top: 1px;">
@@ -153,7 +153,7 @@
             </ui:GroupBox>
         </ui:GroupBox>
     </ui:Foldout>
-    <ui:Foldout text="Additional Settings" name="AdditionalSettings" value="true" class="MySimpleFoldout">
+    <ui:Foldout text="Additional Settings" name="AdditionalSettings" value="false" class="MySimpleFoldout">
         <ui:Foldout text="Projection Settings" name="ProjectionFoldout" value="true" class="DefaultElement" style="margin-left: 5px; padding-left: -12px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-left-color: rgba(255, 255, 255, 0.31); border-right-color: rgba(255, 255, 255, 0.31); border-top-color: rgba(255, 255, 255, 0.31); border-bottom-color: rgba(255, 255, 255, 0.31);">
             <ui:DropdownField label="Projection Mode" index="0" choices="None,Position and Rotation" name="ProjectionMode" binding-path="m_ProjectionMode" />
             <ui:GroupBox name="ProjectionFloatsGroupBox" style="flex-direction: row; justify-content: space-around; padding-top: 1px; margin-top: 1px;">
