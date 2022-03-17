@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:DropdownField label="Active Ragdoll Type" index="0" choices="Generic,Creature" />
+    <ui:Button text="Search For Joints" display-tooltip-when-elided="true" name="ButtonS" />
+</ui:UXML>
