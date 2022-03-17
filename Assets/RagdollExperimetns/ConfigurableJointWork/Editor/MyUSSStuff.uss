@@ -1,18 +1,63 @@
 .MySimpleFoldout {
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
     background-color: rgb(38, 38, 38);
-    border-left-color: rgb(207, 207, 207);
-    border-right-color: rgb(207, 207, 207);
-    border-top-color: rgb(207, 207, 207);
-    border-bottom-color: rgb(207, 207, 207);
+    border-left-color: rgba(207, 207, 207, 0.31);
+    border-right-color: rgba(207, 207, 207, 0.31);
+    border-top-color: rgba(207, 207, 207, 0.31);
+    border-bottom-color: rgba(207, 207, 207, 0.31);
     transition-property: flex-grow;
     transition-duration: 1s;
     flex-shrink: 1;
     -unity-text-outline-width: 0;
     opacity: 1;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    -unity-font-style: bold;
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.unity-base-field {
+}
+
+.DefaultElement {
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    flex-basis: auto;
+    font-size: 12px;
+    -unity-font-style: normal;
+    width: 98%;
+}
+
+.simpleGroupBox {
     margin-top: 2px;
-    margin-bottom: 2px;
+    padding-top: 2px;
+    padding-bottom: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-left-color: rgb(84, 84, 84);
+    border-right-color: rgb(84, 84, 84);
+    border-top-color: rgb(84, 84, 84);
+    border-bottom-color: rgb(84, 84, 84);
+}
+
+.simpleFloatField {
+    flex-direction: column;
+    justify-content: space-around;
+    -unity-font-style: normal;
+    font-size: 12px;
 }
