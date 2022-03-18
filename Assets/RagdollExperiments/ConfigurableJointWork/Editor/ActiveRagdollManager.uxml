@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Foldout text="DefaultInspector" name="DefInspectorFoldout" value="false">
+        <ui:IMGUIContainer name="DefaultInpspectorContainer" />
+    </ui:Foldout>
+    <ui:DropdownField label="Active Ragdoll Type" index="0" choices="Generic,Creature" text="Find Joints" />
+    <ui:Button text="Find Joints Button" display-tooltip-when-elided="true" name="FindJointsButton" />
+    <ui:Button text="Smart Tag, ho" display-tooltip-when-elided="true" name="SmartTagButton" />
+</ui:UXML>
