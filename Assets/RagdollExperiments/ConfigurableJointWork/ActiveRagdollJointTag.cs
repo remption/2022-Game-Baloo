@@ -7,22 +7,10 @@ public class ActiveRagdollJointTag : ScriptableObject
 {
     public string tagName;
     public string[] smartTagSubstrings;
-    public List<ActiveRagdollJointTagInst> taggedBois;
 
-    public void Subscribe(ActiveRagdollJointTagInst jointToSub)
-    {
-        if (taggedBois == null) taggedBois = new List<ActiveRagdollJointTagInst>();
-        if (!taggedBois.Contains(jointToSub)) taggedBois.Add(jointToSub);
-        Debug.Log("well BOIS: "+taggedBois[0].GetType().ToString());
-    }
 
-    public void Unsubscribe(ActiveRagdollJointTagInst jointToUnsub)
-    {
-        if (taggedBois == null) return;
-        taggedBois.Remove(jointToUnsub);
-    }
 
-    public void SmartTag(ConfigurableJoint[] jointsToTag)
+   /* public void SmartTag(ConfigurableJoint[] jointsToTag)
     {
         //Data validation - make sure those joints are legit, bro!
         if(jointsToTag == null || jointsToTag.Length == 0)
@@ -30,7 +18,6 @@ public class ActiveRagdollJointTag : ScriptableObject
             Debug.LogWarning(this.name + " couldn't Smart tag - no joints were given to it");
             return;
         }
-
 
         for (int i = 0; i < jointsToTag.Length; i++)
         {
@@ -42,7 +29,7 @@ public class ActiveRagdollJointTag : ScriptableObject
 
             tagInst.SubscribeMe(this);
         }
-    }
+    }*/
 
 
     /// <summary>
@@ -51,7 +38,7 @@ public class ActiveRagdollJointTag : ScriptableObject
     /// </summary>
     /// <param name="nameToCheck"></param>
     /// <returns></returns>
-    public bool CheckSmartTags(string nameToCheck)
+    public bool StringContainTags(string nameToCheck)
     {
         if (nameToCheck == null) return false;
 

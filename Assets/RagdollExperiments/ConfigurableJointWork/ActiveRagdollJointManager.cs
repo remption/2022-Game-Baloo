@@ -20,7 +20,10 @@ public class ActiveRagdollJointManager : MonoBehaviour
     /// TODO EVENTUALLY - make a "ActiveRagdollManager" Scriptable object. It can hold all of the tag scriptableObjects as a single asset? Or
     /// figure out asset packing so we don't have folders and folders of wierdly placed SOs
     /// </summary>
-    public ActiveRagdollJointTag[] tags; 
+    public ActiveRagdollJointTag[] tags;
+
+    public Dictionary<ActiveRagdollJointTag, List<ActiveRagdollJointTagInst>> tagsAndInstances;
+    
 
     public enum ActiveRagdollDisplayType
     {
@@ -29,18 +32,7 @@ public class ActiveRagdollJointManager : MonoBehaviour
         Humanoid
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    #region jointsListManagement
+    #region ConfigurableJointsListManagement
     public void CollectJoints(GameObject rootObj) {
         EmptyJointsList();
         CollectJointsHelper(rootObj.transform);
@@ -64,8 +56,10 @@ public class ActiveRagdollJointManager : MonoBehaviour
     }
     #endregion
 
-    #region Tagging management
-
+    #region SmartTagging
+    /// <summary>
+    /// Idea - run collect joints first and make sure you have some tag SO's applied.
+    /// </summary>
     public void SmartTagJoints()
     {
         //validate that data is setup
@@ -79,13 +73,71 @@ public class ActiveRagdollJointManager : MonoBehaviour
             Debug.LogWarning(gameObject.name + " ActiveRagdollManager couldn't smart tag because it has no joints assigned");
             return;
         }
+        //make sure our dictionary is ready, bitches!
+        if (tagsAndInstances == null) tagsAndInstances = new Dictionary<ActiveRagdollJointTag, List<ActiveRagdollJointTagInst>>();
 
         //for each tag, give it a chance to do it's tagging biz
         for(int i = 0; i< tags.Length; i++)
         {
-            tags[i].SmartTag(_joints.ToArray());
+            SmartTagHelper(tags[i]);
         }
     }
+
+    /// <summary>
+    /// Does the actual work. Goes through, tag by tag. For each tag, we search through the joints.
+    /// If a joint matches the substrings assigned, we smart tag it. If not, we leave it with whatever it's got.
+    /// </summary>
+    private void SmartTagHelper(ActiveRagdollJointTag tagInUse)
+    {
+        List<ActiveRagdollJointTagInst> instList =new List<ActiveRagdollJointTagInst> ();
+
+        for (int i = 0; i < _joints.Count; i++)
+        {
+            //if the name
+            if (tagInUse.StringContainTags(_joints[i].name))
+            {
+                //add to our list of good chaps
+                
+
+
+            }
+        }
+
+        //add our tag and list to the dictionary, OR update existing entry
+        if (true) ;
+    }
+
+    private void TagItSon(ActiveRagdollJointTag tag, ConfigurableJoint toTag)
+    {
+        if (tag == null || toTag == null) return; //data validation
+
+        //get or create tagInstance
+        ActiveRagdollJointTagInst tagInst = toTag.GetComponent<ActiveRagdollJointTagInst>();
+
+        if(tagInst != null)
+        {
+
+        }
+
+        //else create a fresh boi
+        else tagInst = toTag.gameObject.AddComponent<ActiveRagdollJointTagInst>();
+
+
+
+    }
+
+    public void Subscribe(ActiveRagdollJointTagInst tInst, ActiveRagdollJointTag tagSO)
+    {
+
+    }
+
+    public void Unsubscribe(ActiveRagdollJointTagInst tInst, ActiveRagdollJointTag tagSO)
+    {
+
+    }
+
+
+
     #endregion
 
     public bool stringContains(string toCheck, params string[] args)

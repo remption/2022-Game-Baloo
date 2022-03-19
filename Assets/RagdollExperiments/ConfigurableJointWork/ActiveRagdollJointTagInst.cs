@@ -16,31 +16,32 @@ public class ActiveRagdollJointTagInst : MonoBehaviour
     [HideInInspector] public JointCopyMotion _jointMotion;
 
     public ActiveRagdollJointTag myTagSO;
+    public ActiveRagdollJointManager myManager;
 
     private void OnEnable()
     {
         _myJoint = GetComponent<ConfigurableJoint>();
         _jointMotion = GetComponent<JointCopyMotion>();
-        if (myTagSO != null) myTagSO.Subscribe(this);
     }
 
-    private void OnDisable()
+    public void SubscribeMe(ActiveRagdollJointTag toSubTo, ActiveRagdollJointManager manager)
     {
-        if (myTagSO != null) UnsubscribeMe();
-    }
-
-    public void SubscribeMe(ActiveRagdollJointTag toSubTo)
-    {
-        if (myTagSO != null) myTagSO.Unsubscribe(this);
+        if (myTagSO != null && myManager!= null)
+        {
+            myManager.Unsubscribe(this, myTagSO);
+        }
 
         myTagSO = toSubTo;
-        myTagSO.Subscribe(this);
+        myManager = manager;
+
+        myManager.Subscribe(this, myTagSO);
     }
 
     public void UnsubscribeMe()
     {
-        if(myTagSO != null) myTagSO.Unsubscribe(this);
+        if (myTagSO != null && myManager != null) myManager.Unsubscribe(this, myTagSO);
         myTagSO = null;
+        myManager = null;
     }
 
 }

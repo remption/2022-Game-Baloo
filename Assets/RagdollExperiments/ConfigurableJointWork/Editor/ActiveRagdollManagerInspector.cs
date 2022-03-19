@@ -30,6 +30,10 @@ public class ActiveRagdollManagerInspector : Editor
         button = myInspector.Q<Button>("SmartTagButton");
         button.clickable.clicked += SmartTag;
 
+        
+
+
+
 
         return myInspector;
     }
@@ -62,7 +66,7 @@ public class ActiveRagdollManagerInspector : Editor
 
     void DrawSingleJointPreview(ConfigurableJoint toDraw, ActiveRagdollJointManager manager)
     {
-        SerializedProperty prop = serializedObject.FindProperty("");
+        SerializedProperty jointProp = serializedObject.FindProperty("jointProp");
 
         EditorGUILayout.BeginVertical();
         GUIContent gc = new GUIContent(toDraw.gameObject.name);

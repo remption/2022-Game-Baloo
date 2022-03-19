@@ -35,7 +35,6 @@ public class Shooter : MonoBehaviour
 
     IEnumerator TimedShooter() {
         while (timedShoot) {
-            Debug.Log("in ienumb");
             TakeShot();
             yield return new WaitForSeconds(Mathf.Abs( timebetweenShots));
         }
@@ -43,14 +42,12 @@ public class Shooter : MonoBehaviour
     }
 
     void TakeShot() {
-        Debug.Log("in take shot");
         GameObject obj = GameObject.Instantiate(toClone);
         if (obj == null) Debug.Log("oh boyyy");
         obj.transform.position = this.transform.position;
         Rigidbody bod = obj.GetComponent<Rigidbody>();
         if (bod == null) bod = obj.GetComponentInChildren<Rigidbody>();
         if (bod != null) {
-            Debug.Log("shot");
             Quaternion scatt = Scatter(this.transform.rotation, scatter);
             obj.transform.rotation = scatt;
             bod.AddForce(obj.transform.TransformDirection(localDirection) * force, ForceMode.Impulse);
