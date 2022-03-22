@@ -9,12 +9,10 @@ using UnityEngine.UIElements;
 public class ConfigurableJointInspector : Editor
 {
     public VisualTreeAsset m_InspectorXML;
-    /*public override VisualElement CreateInspectorGUI()
+    public override VisualElement CreateInspectorGUI()
     {
         VisualElement myInspector = new VisualElement();
         m_InspectorXML.CloneTree(myInspector);
-
-      
 
         return myInspector;
     }/**/
