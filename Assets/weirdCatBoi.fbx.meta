@@ -1,11 +1,20 @@
 fileFormatVersion: 2
-guid: 8fecec04aebf3e549ab8490d5f1cb292
+guid: 33afe8491e896824284f847c38ba555e
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
+      74: -6766746764621087938
+    second: FlyPose
+  - first:
+      74: 3411388168697764918
+    second: cat_rig_Walk
+  - first:
       74: -8793504695304399949
     second: gameRig|cat_rig_Walk
+  - first:
+      74: 1212917980357440520
+    second: gameRig|FlyPose
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,8 +45,37 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: gameRig|cat_rig_Walk
-      takeName: gameRig|cat_rig_Walk
+      name: FlyPose
+      takeName: FlyPose
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 14
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: cat_rig_Walk
+      takeName: cat_rig_Walk
       internalID: 0
       firstFrame: 0
       lastFrame: 32

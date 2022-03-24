@@ -1,11 +1,29 @@
 fileFormatVersion: 2
-guid: 8fecec04aebf3e549ab8490d5f1cb292
+guid: a71bf6b7a2e48d6448e12b59553b7dd7
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -8793504695304399949
-    second: gameRig|cat_rig_Walk
+      74: 5982347250400238132
+    second: CatIdle
+  - first:
+      74: -4248549816352184273
+    second: gameRig|FlyPose|FlyPose
+  - first:
+      74: -4771162154826902684
+    second: gameRig|CatIdle
+  - first:
+      74: -7578940575495392316
+    second: gameRig|gameRig|cat_rig_Walk|cat_rig_Walk
+  - first:
+      74: -9205706410957473519
+    second: gameRig|gameRig|FlyPose|FlyPose
+  - first:
+      74: 8444315739658347660
+    second: gameRig|gameRig|gameRig|cat_rig_Walk|gameRig|cat_rig_Walk
+  - first:
+      74: -5000107056083057324
+    second: gameRig|gameRig|gameRig|FlyPose|gameRig|FlyPose
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -34,36 +52,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: gameRig|cat_rig_Walk
-      takeName: gameRig|cat_rig_Walk
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 32
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -125,11 +114,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 33afe8491e896824284f847c38ba555e, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 

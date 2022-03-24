@@ -42,7 +42,7 @@ MonoBehaviour:
       m_Leaf: Recordings
       m_ForceAssetFolder: 0
       m_AbsolutePath: 
-    m_FileName: movie_<Take>
+    m_FileName: wierdGarbage
   outputFormat: 0
   videoBitRateMode: 2
   captureAlpha: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 1658071267801575292}
-    m_Duration: 30
+    m_Duration: 44.125
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8450522398294318889}
     m_EaseInDuration: 0
