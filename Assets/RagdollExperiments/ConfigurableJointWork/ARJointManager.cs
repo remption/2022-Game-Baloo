@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveRagdollJointManager : MonoBehaviour
+public class ARJointManager : MonoBehaviour
 {
     public List<ConfigurableJoint> _joints;//sort of read only in editor - it should just help us find the joints before tagging or if there are some we dont' want tagged
 
@@ -11,7 +11,7 @@ public class ActiveRagdollJointManager : MonoBehaviour
     ///Todo - we could work strictly through the tags array and access their subbed joints, instead of
     ///storing this list of references?
     /// </summary>
-    public List<ActiveRagdollJointTagInst> _taggedJoints;
+    public List<ARJointTagInst> _taggedJoints;
 
     /// <summary>
     ///tags defined for the organization of the editor... need a different structure, tho, that lets us search for multiple snippets (ie, "Left" and "arm" -> left arm
@@ -20,9 +20,9 @@ public class ActiveRagdollJointManager : MonoBehaviour
     /// TODO EVENTUALLY - make a "ActiveRagdollManager" Scriptable object. It can hold all of the tag scriptableObjects as a single asset? Or
     /// figure out asset packing so we don't have folders and folders of wierdly placed SOs
     /// </summary>
-    public ActiveRagdollJointTag[] tags;
+    public ARJointTag[] tags;
 
-    public Dictionary<ActiveRagdollJointTag, List<ActiveRagdollJointTagInst>> tagsAndInstances;
+    public Dictionary<ARJointTag, List<ARJointTagInst>> tagsAndInstances;
     
 
     public enum ActiveRagdollDisplayType
@@ -74,7 +74,7 @@ public class ActiveRagdollJointManager : MonoBehaviour
             return;
         }
         //make sure our dictionary is ready, bitches!
-        if (tagsAndInstances == null) tagsAndInstances = new Dictionary<ActiveRagdollJointTag, List<ActiveRagdollJointTagInst>>();
+        if (tagsAndInstances == null) tagsAndInstances = new Dictionary<ARJointTag, List<ARJointTagInst>>();
 
         //for each tag, give it a chance to do it's tagging biz
         for(int i = 0; i< tags.Length; i++)
@@ -87,9 +87,9 @@ public class ActiveRagdollJointManager : MonoBehaviour
     /// Does the actual work. Goes through, tag by tag. For each tag, we search through the joints.
     /// If a joint matches the substrings assigned, we smart tag it. If not, we leave it with whatever it's got.
     /// </summary>
-    private void SmartTagHelper(ActiveRagdollJointTag tagInUse)
+    private void SmartTagHelper(ARJointTag tagInUse)
     {
-        List<ActiveRagdollJointTagInst> instList =new List<ActiveRagdollJointTagInst> ();
+        List<ARJointTagInst> instList =new List<ARJointTagInst> ();
 
         for (int i = 0; i < _joints.Count; i++)
         {
@@ -107,12 +107,12 @@ public class ActiveRagdollJointManager : MonoBehaviour
         if (true) ;
     }
 
-    private void TagItSon(ActiveRagdollJointTag tag, ConfigurableJoint toTag)
+    private void TagItSon(ARJointTag tag, ConfigurableJoint toTag)
     {
         if (tag == null || toTag == null) return; //data validation
 
         //get or create tagInstance
-        ActiveRagdollJointTagInst tagInst = toTag.GetComponent<ActiveRagdollJointTagInst>();
+        ARJointTagInst tagInst = toTag.GetComponent<ARJointTagInst>();
 
         if(tagInst != null)
         {
@@ -120,18 +120,18 @@ public class ActiveRagdollJointManager : MonoBehaviour
         }
 
         //else create a fresh boi
-        else tagInst = toTag.gameObject.AddComponent<ActiveRagdollJointTagInst>();
+        else tagInst = toTag.gameObject.AddComponent<ARJointTagInst>();
 
 
 
     }
 
-    public void Subscribe(ActiveRagdollJointTagInst tInst, ActiveRagdollJointTag tagSO)
+    public void Subscribe(ARJointTagInst tInst, ARJointTag tagSO)
     {
 
     }
 
-    public void Unsubscribe(ActiveRagdollJointTagInst tInst, ActiveRagdollJointTag tagSO)
+    public void Unsubscribe(ARJointTagInst tInst, ARJointTag tagSO)
     {
 
     }

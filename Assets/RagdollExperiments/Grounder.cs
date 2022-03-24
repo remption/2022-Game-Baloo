@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+/// <summary>
+/// //really crappy script that just helps an object keep a specific distance off the ground or whatever is 
+/// below the raycast point.  Not great
+/// 
+/// </summary>
 public class Grounder : MonoBehaviour
 {
     public Transform raycastOrigin;

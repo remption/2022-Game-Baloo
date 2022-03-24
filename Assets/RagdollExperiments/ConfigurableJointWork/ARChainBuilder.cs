@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
-public class ActRagChainBuilder : MonoBehaviour
+public class ARChainBuilder : MonoBehaviour
 {
     public List<Transform> bones;
    public bool performChain = false;

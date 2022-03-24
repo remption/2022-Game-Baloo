@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ActiveRDJointTag", menuName = "Scriptables/ActiveRag/JointTag")]
-public class ActiveRagdollJointTag : ScriptableObject
+public class ARJointTag : ScriptableObject
 {
     public string tagName;
     public string[] smartTagSubstrings;

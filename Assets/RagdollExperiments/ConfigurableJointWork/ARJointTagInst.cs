@@ -10,13 +10,13 @@ using UnityEngine;
 /// </summary>
 [ExecuteAlways]
 [RequireComponent(typeof(ConfigurableJoint))]
-public class ActiveRagdollJointTagInst : MonoBehaviour
+public class ARJointTagInst : MonoBehaviour
 {
     [HideInInspector]  public ConfigurableJoint _myJoint;
     [HideInInspector] public JointCopyMotion _jointMotion;
 
-    public ActiveRagdollJointTag myTagSO;
-    public ActiveRagdollJointManager myManager;
+    public ARJointTag myTagSO;
+    public ARJointManager myManager;
 
     private void OnEnable()
     {
@@ -24,7 +24,7 @@ public class ActiveRagdollJointTagInst : MonoBehaviour
         _jointMotion = GetComponent<JointCopyMotion>();
     }
 
-    public void SubscribeMe(ActiveRagdollJointTag toSubTo, ActiveRagdollJointManager manager)
+    public void SubscribeMe(ARJointTag toSubTo, ARJointManager manager)
     {
         if (myTagSO != null && myManager!= null)
         {

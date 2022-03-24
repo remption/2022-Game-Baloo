@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
-public class BoneSoloBOi : MonoBehaviour
+public class ARJointMotionSetupTool: MonoBehaviour
 {
     public List<ConfigurableJoint> jointsToAnimate;
     public Transform rootOfObjectToCopy;
     public bool gatherBonesToTag = false;
     public bool addJointCopyScripts = false;
     public bool setupJointCopyScripts = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

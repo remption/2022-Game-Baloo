@@ -7,7 +7,7 @@ using System.Linq;
 using System;
 using System.Reflection;
 
-[CustomEditor(typeof(ActiveRagdollJointManager))]
+[CustomEditor(typeof(ARJointManager))]
 public class ActiveRagdollManagerInspector : Editor
 {
     public VisualTreeAsset _myInspectorXML;
@@ -40,19 +40,19 @@ public class ActiveRagdollManagerInspector : Editor
 
     void CollectJoints()
     {
-        ActiveRagdollJointManager jointMan = (ActiveRagdollJointManager)target;
+        ARJointManager jointMan = (ARJointManager)target;
         jointMan.CollectJoints(jointMan.gameObject);
     }
     void SmartTag()
     {
-        ActiveRagdollJointManager jointMan = (ActiveRagdollJointManager)target;
+        ARJointManager jointMan = (ARJointManager)target;
         jointMan.SmartTagJoints();
     }
 
 
     void DrawJointPreview()
     {
-        ActiveRagdollJointManager jman = (ActiveRagdollJointManager)target;
+        ARJointManager jman = (ARJointManager)target;
         if (jman._joints == null || jman._joints.Count == 0) ;
         else
         {
@@ -64,7 +64,7 @@ public class ActiveRagdollManagerInspector : Editor
         }
     }
 
-    void DrawSingleJointPreview(ConfigurableJoint toDraw, ActiveRagdollJointManager manager)
+    void DrawSingleJointPreview(ConfigurableJoint toDraw, ARJointManager manager)
     {
         SerializedProperty jointProp = serializedObject.FindProperty("jointProp");
 
