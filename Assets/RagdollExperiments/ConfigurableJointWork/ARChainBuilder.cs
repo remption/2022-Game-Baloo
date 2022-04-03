@@ -92,7 +92,10 @@ public class ARChainBuilder : MonoBehaviour
             for (int i = 0; i < bones.Count-1; i++) {
                  capCol = bones[i].GetComponent<CapsuleCollider>();
                 if (capCol == null) capCol = bones[i].gameObject.AddComponent<CapsuleCollider>();
-                if (sizeCapsuleColliders) SizeCapsuleCollider(capCol, bones[i + 1]);
+                if (sizeCapsuleColliders) { 
+                    SizeCapsuleCollider(capCol, bones[i + 1]);
+
+                }
                 capCol = null;
             }
             //do the last one, which can't get sized.
@@ -119,6 +122,10 @@ public class ARChainBuilder : MonoBehaviour
 
     }
 
+    void SizeFinalCollider(CapsuleCollider toSize)
+    {
+
+    }
 
     void SizeCapsuleCollider(CapsuleCollider toSize, Transform nextBone) {
         Transform cur = toSize.transform;

@@ -58,6 +58,8 @@ public class JointCopyMotion : MonoBehaviour
 
 
 
+
+
     /*
     void CalculateOffsetAndStuff()
     {
@@ -86,4 +88,15 @@ public class JointCopyMotion : MonoBehaviour
 
         return toClamp;
     } */
+}
+
+public static class JointCopyMotionExtensions
+{
+    public static void CopySettings(this JointCopyMotion copyTo, JointCopyMotion copyFrom)
+    {
+        copyTo.toCopy = copyFrom.toCopy;
+        copyTo.copyPosition = copyFrom.copyPosition;
+        copyTo.copyRotation = copyFrom.copyRotation;
+        copyTo.local = copyFrom.local;
+    }
 }
