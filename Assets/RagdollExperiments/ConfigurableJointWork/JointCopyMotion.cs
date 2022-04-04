@@ -47,7 +47,7 @@ public class JointCopyMotion : MonoBehaviour
         {
             if (local) {
                if(copyRotation) ConfigurableJointExtensions.SetTargetRotationLocal(myJoint, toCopy.localRotation, toCopyStartRot);
-               if(copyPosition) myJoint.targetPosition = toCopyStartPos - toCopy.localPosition;
+                if (copyPosition) myJoint.targetPosition = (toCopy.localPosition - toCopyStartPos)*.1f;
             }
             else {
                 if(copyRotation)ConfigurableJointExtensions.SetTargetRotation(myJoint, toCopy.rotation, toCopyStartRot);
