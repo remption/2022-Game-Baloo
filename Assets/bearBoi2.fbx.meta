@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 277577240078643245
-    second: defaultPose
+    second: 4LegDefaultPose
   - first:
       74: -3873483695422230203
     second: 4LegRun
@@ -48,7 +48,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: defaultPose
+      name: 4LegDefaultPose
       takeName: defaultPose
       internalID: 0
       firstFrame: 0
