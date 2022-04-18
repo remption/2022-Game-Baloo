@@ -36,6 +36,9 @@ public class BearController : MonoBehaviour
     private bool input_sprinting = false;
     private bool input_standToggled = false;
 
+
+    private float defaultGrassShaderBearStrength = 2.5f;
+    private float twoLegGrassShaderBearStrength = 1;
     
     // Start is called before the first frame update
     void Start()
@@ -88,6 +91,13 @@ public class BearController : MonoBehaviour
     {
         input_standToggled = false; //we've used the 'event', so set to false;
         isOn2Legs = !isOn2Legs;
+        if (isOn2Legs) {
+            Shader.SetGlobalFloat("_bbyBearStrength", twoLegGrassShaderBearStrength);
+        }
+        else
+        {
+            Shader.SetGlobalFloat("_bbyBearStrength", defaultGrassShaderBearStrength);
+        }
         if (animator != null) animator.SetBool("2LegMode", isOn2Legs);
     }
 
