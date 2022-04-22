@@ -132,7 +132,7 @@ Material:
     - _ZWrite: 1
     - _bbyBearStrength: 2.36
     m_Colors:
-    - _BBBearPositionColor: {r: 0.6043303, g: 0.9716981, b: 0.46293163, a: 1}
+    - _BBBearPositionColor: {r: 0.34515488, g: 0.735849, b: 0.03818085, a: 1}
     - _BabyBearPosition: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.5062181, g: 0.8773585, b: 0.21106264, a: 1}

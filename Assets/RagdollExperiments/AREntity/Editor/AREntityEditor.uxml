@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Button text="Gather Configurable Joints" display-tooltip-when-elided="true" name="GatherJointsButton" />
+    <ui:GroupBox style="flex-direction: row; padding-top: 2px; padding-bottom: 2px; margin-top: 2px; justify-content: space-between;">
+        <uie:ObjectField label="Motion Source Obj" type="UnityEngine.Transform, UnityEngine.CoreModule" name="MotionSourceField" binding-path="motionSourceRoot" style="min-width: 40%; max-width: 70%; justify-content: space-around;" />
+        <ui:Button text="Auto Assign" display-tooltip-when-elided="true" name="SmartAssignMotionSources" />
+    </ui:GroupBox>
+    <uie:PropertyField name="JointsList" label="Joints List" binding-path="joints" tooltip="Gather any configurable joints in this object&apos;s heirarchy" />
+</ui:UXML>

@@ -5,9 +5,16 @@ using UnityEngine.InputSystem;
 
 public class BearController : MonoBehaviour
 {
-    private Camera _cam;
+    public bool grounded = false; //TODO - should be private, but made public for debugging
 
-    
+    private Camera _cam;
+    public Transform groundedRayCastOrigin;
+    public LayerMask groundedCastLayerMask = new LayerMask();
+    public float groundedRaycastDist = 50;
+    public float rideHeight = .3f; // how far above the ground the capsule should be
+    public float rideSpringStrength = 100;
+    public float rideSpringDamp = 5;
+
 
     private Vector2 _forwardDirection;//calculate in relation to camera! or, should take into account ground plane (aka slope)???
     private float _targetYRotation;
@@ -83,8 +90,9 @@ public class BearController : MonoBehaviour
 
         }
 
+        VerticalSpring2Leg();
 
-        
+
     }
 
     void HandleStandToggleRequest()
@@ -135,7 +143,8 @@ public class BearController : MonoBehaviour
         
         Vector3 toRet = _cam.transform.forward.normalized * v.y + _cam.transform.right.normalized * v.x;
         toRet.y = 0;
-        return toRet;
+
+        return toRet.normalized;
     
     }
 
@@ -154,4 +163,45 @@ public class BearController : MonoBehaviour
     {
          input_standToggled = value.Get<float>() > 0;//if greater than 0, we've had a button press!
     }
+
+    public void VerticalSpring2Leg()
+    {
+        if(groundedRayCastOrigin == null)
+        {
+            Debug.LogWarning("BearController couldn't send a ground ray, as it's origin transform as not been set");
+            return;
+        }
+        RaycastHit hit = new RaycastHit();
+        Ray ray = new Ray(groundedRayCastOrigin.position, Vector3.down);
+
+        if(Physics.Raycast(ray, out hit, groundedRaycastDist, groundedCastLayerMask.value))
+        {
+            grounded = true;
+            Vector3 velo = rigidBody.velocity;
+            Vector3 otherVelo = Vector3.zero;
+            Rigidbody otherBod = hit.rigidbody;
+            if(otherBod != null) otherVelo = otherBod.velocity;
+
+            float rayDirVel = Vector3.Dot(Vector3.down, velo); //how "downward" are we going?
+            float otherDirVel = Vector3.Dot(Vector3.down, otherVelo); //how "downward" is other going?
+
+            float relVel = rayDirVel - otherDirVel;
+            float x = hit.distance - rideHeight;
+
+            float springForce = (x * rideSpringStrength) - (relVel * rideSpringDamp);
+
+            rigidBody.AddForce(Vector3.down * springForce);
+            
+            if (otherBod != null) otherBod.AddForceAtPosition(Vector3.down * -springForce, hit.point); //if collided object has a rigidbody, we can wiggle it :) Make it bounce
+
+        }
+        else grounded = false;
+
+    }
+
+    public void VerticalSpringFourLeg()
+    {
+
+    }
+
 }

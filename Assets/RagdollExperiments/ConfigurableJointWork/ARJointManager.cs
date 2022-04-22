@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// TO EVENTUALLY DELETE!
+/// Was my first idea at making a ARManager type script. Have replaced with "AREnitity".
+/// </summary>
 public class ARJointManager : MonoBehaviour
 {
     public List<ConfigurableJoint> _joints;//sort of read only in editor - it should just help us find the joints before tagging or if there are some we dont' want tagged
