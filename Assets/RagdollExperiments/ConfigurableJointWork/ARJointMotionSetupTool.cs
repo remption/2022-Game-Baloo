@@ -17,7 +17,8 @@ public class ARJointMotionSetupTool: MonoBehaviour
         if (gatherBonesToTag)
         {
             gatherBonesToTag = false;
-            GatherBones();
+            //gather all the joints
+            jointsToAnimate = new List<ConfigurableJoint>(GetComponentsInChildren<ConfigurableJoint>());
         }
 
         if (addJointCopyScripts)
@@ -47,7 +48,7 @@ public class ARJointMotionSetupTool: MonoBehaviour
             }
             else{
                 
-                Transform toCopyFrom = FindInHeirarchy(rootOfObjectToCopy, joint.gameObject.name);
+                Transform toCopyFrom = rootOfObjectToCopy.FindDeepChild(joint.gameObject.name);
                 if (toCopyFrom != null)
                 {
                     jcm.toCopy = toCopyFrom;
@@ -61,23 +62,6 @@ public class ARJointMotionSetupTool: MonoBehaviour
         }
     }
 
-
-
-    public Transform FindInHeirarchy(Transform root, string lookFor)
-    {
-        if(root.name == lookFor) return root;
-        Transform toRet = null;
-        for (int i = 0; i < root.childCount; i++)
-        {
-            toRet = FindInHeirarchy(root.GetChild(i), lookFor);
-            if (toRet != null) return toRet;
-
-        }
-  
-        return null;      //didn't find :(
-    }
-
-
     void AddJointMoveScript()
     {
         if (jointsToAnimate == null || jointsToAnimate.Count == 0) return;
@@ -87,10 +71,5 @@ public class ARJointMotionSetupTool: MonoBehaviour
             if(jcm == null) jcm = joint.gameObject.AddComponent<JointCopyMotion>();
 
         }
-    }
-
-    void GatherBones()
-    {
-        jointsToAnimate = new List<ConfigurableJoint>(GetComponentsInChildren<ConfigurableJoint>());
     }
 }

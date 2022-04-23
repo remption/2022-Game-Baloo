@@ -38,35 +38,54 @@ public class AREnitityEditor : Editor
 
 
     #region jointGathering
+    /// <summary>
+    /// Gets all of the ConfigurableJoints in our GameObject's hierarchy.
+    /// Then, checks each joint against the entity's existing joints list.
+    /// If a joint isn't in the list, it is added via its own new ARJointData.
+    /// </summary>
     void GatherJointsIntoARJointDataObjects()
     {
         AREntity entity = (AREntity)target;
         Transform t = entity.transform;
         if(entity.joints ==null) entity.joints = new List<ARJointData>();
 
-        GatherJointsHelper(t, entity.joints);
-    }
-
-    //Creates depth-first list :)
-    void GatherJointsHelper(Transform toCollectFrom, List<ARJointData> toAddTo)
-    {
-        if (toCollectFrom == null) return;
-
-        ConfigurableJoint foundJoint = toCollectFrom.GetComponent<ConfigurableJoint>();
-        if (foundJoint != null)
-        {
-           if (!ListContainsConfigurableJoint(foundJoint, toAddTo))
-            {
+        //Gather joints, and then check each. For each one that is not in the entity.joints list, make a new ARJointData and add it! 
+        ConfigurableJoint[] potentialJoints =  entity.GetComponentsInChildren<ConfigurableJoint>();
+        for(int i = 0; i < potentialJoints.Length; i++) {
+            if (!ListContainsConfigurableJoint(potentialJoints[i], entity.joints)) {
                 ARJointData ajd = new ARJointData();
-                ajd.joint = foundJoint;
-                toAddTo.Add(ajd);
+                ajd.joint = potentialJoints[i];
+                entity.joints.Add(ajd);
             }
         }
-        for (int i = 0; i < toCollectFrom.childCount; i++)
-        {
-            GatherJointsHelper(toCollectFrom.GetChild(i), toAddTo);
+    }
+
+    /// <summary>
+    /// For each joint in the AREntity's "joint" list, search and see if there is an identically named 
+    /// tranform in the "motionSourceRoot" heirarchy. If so, assign that identically named transform 
+    /// to be the joint's motion source.  
+    /// 
+    /// This method may assign incorrect objects if there are identicaly named objects in the motion source heirarchy,
+    /// as it doesn't take into consideration an object's position in the hierarchy. So, unique naming is important.
+    /// </summary>
+    void SmartAssignMotionSources() {
+        AREntity entity = (AREntity)target;
+        if (entity.motionSourceRoot == null || entity.joints == null || entity.joints.Count == 0) return;
+
+        ARJointData cur;
+        for (int i = 0; i < entity.joints.Count; i++) {
+            //get joint and make sure it doesn't have derailing null values
+            cur = entity.joints[i];
+            if(cur == null || cur.joint == null) continue;
+            // if there is a child in the motion source with a matching name, make it the source!
+            cur.motionSource = entity.motionSourceRoot.transform.FindDeepChild(cur.joint.name);
         }
     }
+
+    
+
+
+    #endregion
 
     /// <summary>
     /// True if the ARJointData list contains an entry for the given joint already
@@ -74,9 +93,6 @@ public class AREnitityEditor : Editor
     /// <param name="j"></param>
     /// <param name="_arDatas"></param>
     /// <returns></returns>
-
-    #endregion
-   
     bool ListContainsConfigurableJoint(ConfigurableJoint j, List<ARJointData> _arDatas)
     {
         if (_arDatas == null) return false;
