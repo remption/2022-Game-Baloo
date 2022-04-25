@@ -18,6 +18,19 @@ public class AREntity : MonoBehaviour
     //will be setup correctly in the scripts that use these variables. Also, name uniquenss is important, as duplicates aren't handled.
     public AREntity entityToClone; //used by editor to copy/duplicate the setup of another AREntity on an identically-ish rigged gameObj
     public Transform physicsCloneRoot; //used by editor to copy/duplicate the physics components/setup of an identically-ish rigged gameObj
+
+    //Physics cloning settings - editor only
+    public bool copyRigidbods = true;
+    public bool copyRigidBodSettings = true;
+    public bool copyConfigJoints = true;
+    public bool copyConfigJointSettings = true;
+    public bool copyColliders = true;
+
+    //AREntity cloning settings - editor only
+    public bool copyJointList = true;
+    public bool copyMotionTargets = true;
+    public bool copyMotionSettings = true;
+
 #endif
 
     // Start is called before the first frame update
@@ -36,8 +49,6 @@ public class AREntity : MonoBehaviour
             joints[i].ApplyMotionTargeting();
         }
     }
-
-
 
 }
 

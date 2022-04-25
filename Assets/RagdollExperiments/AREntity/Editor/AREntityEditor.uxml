@@ -2,34 +2,37 @@
     <ui:Foldout text="Setup and Initialization Tools" name="SetupFoldout">
         <ui:Button text="Gather Configurable Joints" display-tooltip-when-elided="true" name="GatherJointsButton" />
         <ui:Foldout text="Physics Cloning" name="PhysicsCloneFoldout" value="true" style="flex-shrink: 1; background-color: rgb(38, 38, 38); padding-bottom: 1px; margin-bottom: 3px;">
-            <ui:GroupBox name="ToCloneGroupBox" style="flex-direction: row; padding-top: 2px; padding-bottom: 2px; margin-top: 2px; justify-content: space-between;">
-                <uie:ObjectField label="To Clone Root" type="UnityEngine.Transform, UnityEngine.CoreModule" name="MotionSourceField" style="min-width: 40%; max-width: 70%; justify-content: space-around;" />
-                <ui:Button text="Clone" display-tooltip-when-elided="true" name="PhysicsCloneButton" />
+            <ui:GroupBox name="ToCloneGroupBox" style="flex-direction: row; padding-top: 2px; padding-bottom: 2px; margin-top: 2px; justify-content: space-between; margin-left: 1px; padding-left: 1px;">
+                <ui:Label text="To Clone Root" display-tooltip-when-elided="true" name="toClonePhysLabel" style="margin-top: 1px; margin-bottom: 1px; -unity-text-align: middle-center;" />
+                <uie:ObjectField type="UnityEngine.Transform, UnityEngine.CoreModule" name="physicsCloneRootField" binding-path="physicsCloneRoot" style="min-width: 40%; max-width: 70%; justify-content: space-around;" />
+                <ui:Button text="Clone" display-tooltip-when-elided="true" name="physicsCloneButton" />
             </ui:GroupBox>
             <ui:GroupBox name="rigidBodGroupBox" style="flex-direction: row; margin-left: 1px; margin-right: 1px; margin-top: 1px; padding-left: 1px; padding-top: 1px; padding-bottom: 1px;">
-                <ui:Toggle text="RigidBodies" name="RigidBodToggle" />
-                <ui:Toggle text="RigidBod Settings" name="RigidBodSettingsToggle" value="false" />
+                <ui:Toggle text="RigidBodies" name="RigidBodToggle" binding-path="copyRigidbods" />
+                <ui:Toggle text="RigidBod Settings" name="RigidBodSettingsToggle" value="false" binding-path="copyRigidBodSettings" />
             </ui:GroupBox>
             <ui:GroupBox name="cJointGroupBox" style="flex-direction: row; margin-left: 1px; margin-right: 1px; margin-top: 1px; padding-left: 1px; padding-top: 1px; padding-bottom: 1px;">
-                <ui:Toggle text="Configurable Joints" name="ConfigurableJointToggle" />
-                <ui:Toggle text="Joint Settings" name="CJointSettingsToggle" value="false" />
+                <ui:Toggle text="Configurable Joints" name="ConfigurableJointToggle" binding-path="copyConfigJoints" />
+                <ui:Toggle text="Joint Settings" name="CJointSettingsToggle" value="false" binding-path="copyConfigJointSettings" />
             </ui:GroupBox>
-            <ui:Toggle text="Colliders" name="CollidersToggle" value="false" />
+            <ui:Toggle text="Colliders" name="CollidersToggle" value="false" binding-path="copyColliders" />
         </ui:Foldout>
         <ui:Foldout text="AREntity Cloning" name="ARCloneFoldout" value="true" style="flex-shrink: 1; background-color: rgb(38, 38, 38); padding-bottom: 1px; margin-bottom: 3px;">
             <ui:GroupBox name="AREntityCloneGroupBox" style="flex-direction: row; padding-top: 2px; padding-bottom: 2px; margin-top: 2px; justify-content: space-between;">
-                <uie:ObjectField label="Enitity To Clone" name="CloneField" binding-path="entityToClone" allow-scene-objects="true" type="AREntity, Assembly-CSharp" style="min-width: 40%; max-width: 70%; justify-content: space-around;" />
-                <ui:Button text="Clone" display-tooltip-when-elided="true" name="Clone" />
+                <ui:Label text="Enitity To Clone" display-tooltip-when-elided="true" name="AREntityCloneLabel" style="-unity-text-align: middle-left;" />
+                <uie:ObjectField name="AREntityToCloneField" binding-path="entityToClone" allow-scene-objects="true" type="AREntity, Assembly-CSharp" style="min-width: 40%; max-width: 70%; justify-content: space-around;" />
+                <ui:Button text="Clone" display-tooltip-when-elided="true" name="AREntityCloneButton" />
             </ui:GroupBox>
             <ui:GroupBox name="rigidBodGroupBox" style="flex-direction: row; margin-left: 1px; margin-right: 1px; margin-top: 1px; padding-left: 1px; padding-top: 1px; padding-bottom: 1px;">
-                <ui:Toggle text="Joint List" name="JointListToggle" />
-                <ui:Toggle text="Motion Targets" name="MotionTargetsToggle" value="false" />
+                <ui:Toggle text="Joint List" name="JointListToggle" binding-path="copyJointList" />
+                <ui:Toggle text="Motion Targets" name="MotionTargetsToggle" value="false" binding-path="copyMotionTargets" />
             </ui:GroupBox>
-            <ui:Toggle text="Motion Settings" name="MotionTargetsToggle" value="false" />
+            <ui:Toggle text="Motion Settings" name="MotionTargetsToggle" value="false" binding-path="copyMotionSettings" />
         </ui:Foldout>
-        <ui:GroupBox name="MotionSourceGroupBox" style="flex-direction: row; padding-top: 2px; padding-bottom: 2px; margin-top: 2px; justify-content: space-between;">
-            <uie:ObjectField label="Motion Source Obj" type="UnityEngine.Transform, UnityEngine.CoreModule" name="MotionSourceField" binding-path="motionSourceRoot" style="min-width: 40%; max-width: 70%; justify-content: space-around;" />
-            <ui:Button text="Auto Assign" display-tooltip-when-elided="true" name="SmartAssignMotionSources" />
+        <ui:GroupBox name="MotionSourceGroupBox" style="flex-direction: row; padding-top: 2px; padding-bottom: 2px; margin-top: 2px; justify-content: space-between; padding-left: 1px; margin-left: 1px; margin-right: 1px; flex-wrap: nowrap;">
+            <ui:Label text="Motion Source" display-tooltip-when-elided="true" name="motionSourceLabel" style="max-width: 35%; min-width: 25%; margin-left: 2px; margin-right: 2px;" />
+            <uie:ObjectField type="UnityEngine.Transform, UnityEngine.CoreModule" name="MotionSourceField" binding-path="motionSourceRoot" style="min-width: 33%; max-width: 50%; justify-content: space-around;" />
+            <ui:Button text="Auto Assign" display-tooltip-when-elided="true" name="SmartAssignMotionSources" style="max-width: 64%; min-width: 33%; padding-left: 2px; padding-right: 1px; margin-right: 2px; margin-left: 2px; width: 93px;" />
         </ui:GroupBox>
     </ui:Foldout>
     <uie:PropertyField name="JointsList" label="Joints List" binding-path="joints" tooltip="Gather any configurable joints in this object&apos;s heirarchy" />
