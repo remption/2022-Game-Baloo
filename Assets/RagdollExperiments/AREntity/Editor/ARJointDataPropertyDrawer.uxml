@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <uie:ObjectField label="ConfigJoint" type="UnityEngine.ConfigurableJoint, UnityEngine.PhysicsModule" allow-scene-objects="true" name="ConfigJoint" binding-path="joint" style="margin-top: 1px; margin-left: 23px;" />
-    <ui:Foldout value="false" style="margin-top: -17px; padding-top: 0; padding-bottom: -20px;">
-        <ui:GroupBox style="align-items: auto; flex-direction: row; padding-top: 0; padding-bottom: 1px; margin-top: 3px;">
+    <ui:Foldout value="false" style="margin-top: -17px; padding-top: 0; padding-bottom: -20px; align-items: flex-start; max-width: 30px; min-width: 10px;">
+        <ui:GroupBox style="align-items: center; flex-direction: row; padding-top: 0; padding-bottom: 1px; margin-top: 3px; right: auto; flex-wrap: nowrap; width: 300%;">
             <ui:Toggle binding-path="enableMotionCopying" name="EnableMotionCopying" text="Copy" style="flex-direction: row-reverse; width: 30%; min-width: 30%; max-width: 40%;" />
             <uie:ObjectField type="UnityEngine.Transform, UnityEngine.CoreModule" name="MotionSource" binding-path="motionSource" style="width: 70%; min-width: 30%; max-width: 70%;" />
         </ui:GroupBox>

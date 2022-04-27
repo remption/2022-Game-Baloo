@@ -33,6 +33,8 @@ public class AREntity : MonoBehaviour
 
 #endif
 
+    public List<ARJointGroup> jointGroups;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,11 @@ public class AREntity : MonoBehaviour
     void InitARJointDatas() {
         for (int i = 0; i < joints.Count; i++)
             joints[i].GatherInitialTransform();
+    }
+
+
+    private void Update() {
+        ApplyMotionTargetingUpdate();
     }
 
 
@@ -82,4 +89,51 @@ public class ARJointData
         initPosition = joint.transform.localPosition;
         initRotation = joint.transform.localRotation;
     }
+}
+
+
+//TODO - Editor only? only usage I can possible think of is to change vals ConfigJoint values at runtime,
+//but this just seems a little bloaty for that usage case.
+[System.Serializable]
+public class ARJointGroup {
+    public enum ColliderType {
+        Capsule,
+        Sphere,
+        Box
+    }
+    public string groupName;
+    public List<ARJointGroupEntry> members;
+
+    /*chain and physics stuff for adding/basic setup of colliders and joints*/
+    public bool isChain = false;
+    public bool addColliders = false;
+    public ColliderType colliderType = ColliderType.Capsule;
+    public float capsuleHeightWidthRatio = 2;
+    //  public float sphereColliderRadius = 1;
+    //public Vector3 boxColliderDimensions = Vector3.one;
+    public bool addJoint = false;
+
+    //JOINT AND PHYSICS MATERIAL CONTROLS
+    public PhysicMaterial physicsMat;
+    public ConfigurableJointMotion motionDefaults = ConfigurableJointMotion.Locked;
+    public ConfigurableJointMotion rotationDefaults = ConfigurableJointMotion.Free;
+    public RotationDriveMode rotationDriveMode = RotationDriveMode.Slerp;
+    //joint drive settings
+    public float rotationSpring;
+    public float rotationDamping;
+    public float maxRotationForce;
+    //for use in editor - so we user doesn't have to push updates/overwrites to EVERY single field.
+    public bool updatedPhysicsMat = true;
+    public bool updateMotionDefaults = true;
+    public bool updateRotationDefaults = true;
+    public bool updateRotationDriveMode = true;
+    public bool updateRotationSpring = true;
+    public bool updateRotationDamping = true;
+    public bool updateMaxRotationForce = true;
+}
+
+[System.Serializable]
+public class ARJointGroupEntry {
+    public Transform joint;
+    public bool updateAllowed;//permission for the editor to update it's settings via the AREntity editor tool.
 }

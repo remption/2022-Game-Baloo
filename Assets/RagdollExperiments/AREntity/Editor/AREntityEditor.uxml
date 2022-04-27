@@ -35,5 +35,10 @@
             <ui:Button text="Auto Assign" display-tooltip-when-elided="true" name="SmartAssignMotionSources" style="max-width: 64%; min-width: 33%; padding-left: 2px; padding-right: 1px; margin-right: 2px; margin-left: 2px; width: 93px;" />
         </ui:GroupBox>
     </ui:Foldout>
-    <uie:PropertyField name="JointsList" label="Joints List" binding-path="joints" tooltip="Gather any configurable joints in this object&apos;s heirarchy" />
+    <ui:GroupBox name="EnableDisableMotionGroupBox" style="flex-direction: row;">
+        <ui:Button text="Enable All Motion" display-tooltip-when-elided="true" focusable="true" name="enableAllMotionButton" />
+        <ui:Button text="Disable All Motion" display-tooltip-when-elided="true" name="disableAllMotionButton" />
+    </ui:GroupBox>
+    <uie:PropertyField name="JointsList" label="Joints Master List" binding-path="joints" tooltip="Gather any configurable joints in this object&apos;s heirarchy" />
+    <uie:PropertyField name="jointGroupsList" label="Joint Groups" binding-path="jointGroups" tooltip="Gather any configurable joints in this object&apos;s heirarchy" />
 </ui:UXML>

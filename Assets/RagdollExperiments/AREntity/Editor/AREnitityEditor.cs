@@ -6,18 +6,16 @@ using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 [CustomEditor(typeof(AREntity))]
-public class AREnitityEditor : Editor
-{
+public class AREnitityEditor : Editor {
     public VisualTreeAsset m_InspectorXML;
-    public override VisualElement CreateInspectorGUI()
-    {
+    public override VisualElement CreateInspectorGUI() {
         VisualElement myInspector = new VisualElement();
         m_InspectorXML.CloneTree(myInspector);
 
         //Gather joints button
         Button button = myInspector.Q<Button>("GatherJointsButton");
         button.clickable.clicked += GatherJointsIntoARJointDataObjects;
-        
+
         //Physics Clone Button
         button = myInspector.Q<Button>("physicsCloneButton");
         button.clickable.clicked += ClonePhysicsFromObj;
@@ -25,6 +23,14 @@ public class AREnitityEditor : Editor
         //AREntity Clone Button
         button = myInspector.Q<Button>("AREntityCloneButton");
         button.clickable.clicked += CloneAREntity;
+
+        //Enable all joint motion toggles button
+        button = myInspector.Q<Button>("enableAllMotionButton");
+        button.clickable.clicked += EnableAllJointMotion;
+
+        //disable all joint motion toggles button
+        button = myInspector.Q<Button>("disableAllMotionButton");
+        button.clickable.clicked += DisableAllJointMotion;
 
         //Auto Assign motion source button
         button = myInspector.Q<Button>("SmartAssignMotionSources");
@@ -38,11 +44,14 @@ public class AREnitityEditor : Editor
 
         return myInspector;
     }
-    
+
 
 
     #region Setup and Initialization Tools
     void ClonePhysicsFromObj() {
+       // Undo.RecordObject(target, "Cloned Physics via AREntity"); //TODO - BUG! This Undo funtion fails,
+                                                       //   because each physics obj it makes registers an undo thang. We need to group changes after function runs...
+
         AREntity entity = (AREntity)target;
 
         if (entity.physicsCloneRoot == null) {
@@ -52,12 +61,38 @@ public class AREnitityEditor : Editor
 
         if (entity.copyRigidbods) CopyRigidBodies();
         if (entity.copyConfigJoints) CopyConfigurableJoints();
-        if (entity.copyColliders) CopyColliders() ;// CopyColliders();
-        
+        if (entity.copyColliders) CopyColliders();// CopyColliders();
+
     }
 
-    void CloneAREntity() { 
-    
+    void CloneAREntity() {
+        Undo.RecordObject(target, "Cloned AREntity Settings");
+        AREntity entity = (AREntity)target;
+        if (entity.entityToClone == null) return;//data validation - make sure we've something copy
+
+        AREntity cloning = entity.entityToClone;//what we're cloning
+
+        //copy editor data? Eh, just the main ones...
+        entity.motionSourceRoot = cloning.motionSourceRoot;
+
+        //Try to recreate identical joint list/setup
+        entity.joints = new List<ARJointData>();
+        for (int i = 0; i < cloning.joints.Count; i++) {
+            ARJointData aRToAdd = new ARJointData();
+            ARJointData toClone = cloning.joints[i];
+
+            //First, try to find the relevant configurable joint!
+            if (toClone.joint != null) {
+                Transform equivChild = entity.transform.FindDeepChild(toClone.joint.name);
+                ConfigurableJoint equivJoint = equivChild.GetComponent<ConfigurableJoint>();
+                if (equivJoint != null) aRToAdd.joint = equivJoint;
+                else Debug.LogWarning("AREntity " + entity.name + " failed to clone joint ind: " + i + ", name: " +
+                    toClone.joint.name + " as it had no identically named child in its heirarchy ");
+            }
+            aRToAdd.motionSource = toClone.motionSource;
+            aRToAdd.enableMotionCopying = toClone.enableMotionCopying;
+            entity.joints.Add(aRToAdd);
+        }
     }
 
     /// <summary>
@@ -66,6 +101,7 @@ public class AREnitityEditor : Editor
     /// If a joint isn't in the list, it is added via its own new ARJointData.
     /// </summary>
     void GatherJointsIntoARJointDataObjects() {
+        Undo.RecordObject(target, "AREntity Gathered all ConfigJoints");
         AREntity entity = (AREntity)target;
         Transform t = entity.transform;
         if (entity.joints == null) entity.joints = new List<ARJointData>();
@@ -80,7 +116,7 @@ public class AREnitityEditor : Editor
             }
         }
     }
-    
+
     /// <summary>
     /// For each joint in the AREntity's "joint" list, search and see if there is an identically named 
     /// tranform in the "motionSourceRoot" heirarchy. If so, assign that identically named transform 
@@ -90,6 +126,7 @@ public class AREnitityEditor : Editor
     /// as it doesn't take into consideration an object's position in the hierarchy. So, unique naming is important.
     /// </summary>
     void SmartAssignMotionSources() {
+        Undo.RecordObject(target, "AREntity Smart Assign Motion Sources");
         AREntity entity = (AREntity)target;
         if (entity.motionSourceRoot == null || entity.joints == null || entity.joints.Count == 0) return;
 
@@ -97,7 +134,7 @@ public class AREnitityEditor : Editor
         for (int i = 0; i < entity.joints.Count; i++) {
             //get joint and make sure it doesn't have derailing null values
             cur = entity.joints[i];
-            if(cur == null || cur.joint == null) continue;
+            if (cur == null || cur.joint == null) continue;
             // if there is a child in the motion source with a matching name, make it the source!
             cur.motionSource = entity.motionSourceRoot.transform.FindDeepChild(cur.joint.name);
         }
@@ -110,16 +147,36 @@ public class AREnitityEditor : Editor
     /// <param name="j"></param>
     /// <param name="_arDatas"></param>
     /// <returns></returns>
-    bool ListContainsConfigurableJoint(ConfigurableJoint j, List<ARJointData> _arDatas)
-    {
+    bool ListContainsConfigurableJoint(ConfigurableJoint j, List<ARJointData> _arDatas) {
         if (_arDatas == null) return false;
-        for (int i = 0;i < _arDatas.Count; i++)
-        {
-            if(_arDatas[i].joint == j)return true;
+        for (int i = 0; i < _arDatas.Count; i++) {
+            if (_arDatas[i].joint == j) return true;
         }
 
         return false;
     }
+
+    #region TOGGLE JOINT MOTION COPYING
+    void EnableAllJointMotion() {
+        Undo.RecordObject(target, "Enabled All Joint Motion");
+        SetAllJointMotion(true); 
+    }
+    void DisableAllJointMotion() {
+        Undo.RecordObject(target, "Disabled All Joint Motion");
+        SetAllJointMotion(false);
+    }
+    /// <summary>
+    /// Go through all the joints in the joint list and set their "motion copying enabled" bool to given value
+    /// </summary>
+    /// <param name="setTo"></param>
+    void SetAllJointMotion(bool setTo) {
+        AREntity entity = (AREntity)target;
+        if (entity == null || entity.joints == null) return;
+        
+        for (int i = 0;i < entity.joints.Count; i++)
+            entity.joints[i].enableMotionCopying = setTo;
+    }
+    #endregion
 
     #region CLONING SUBROUTINES
     void CopyRigidBodies() {

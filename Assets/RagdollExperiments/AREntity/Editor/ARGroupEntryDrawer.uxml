@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:GroupBox style="flex-direction: row; justify-content: space-around;">
+        <ui:Toggle binding-path="updateAllowed" name="updateAllowedToggle" />
+        <ui:Label text="Joint" display-tooltip-when-elided="true" />
+        <uie:ObjectField type="UnityEngine.Transform, UnityEngine.CoreModule" binding-path="joint" name="jointPicker" style="align-items: stretch; justify-content: space-around;" />
+    </ui:GroupBox>
+</ui:UXML>

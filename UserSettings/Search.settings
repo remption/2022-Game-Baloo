@@ -7,7 +7,7 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.7F95D817" = "bone"
+	"last_search.7F95D817" = "JointMotionCopy"
 	"OpenInspectorPreview.7F95D817" = "0"
 	"currentGroup.7F95D817" = "scene"
 	"last_search.83F126EB" = ""
@@ -62,6 +62,7 @@ providers = {
 	}
 }
 recentSearches = [
+	"JointMotionCopy"
 ]
 searchItemFavorites = [
 ]
